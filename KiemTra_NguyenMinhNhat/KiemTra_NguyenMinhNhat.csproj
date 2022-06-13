@@ -54,6 +54,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -128,15 +129,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HocPhanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DangKy.cs" />
-    <Compile Include="Models\DBModelContext.cs" />
-    <Compile Include="Models\HocPhan.cs" />
-    <Compile Include="Models\NganhHoc.cs" />
-    <Compile Include="Models\SinhVien.cs" />
+    <Compile Include="Models\DBModelContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModelContext.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +154,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Models\DBModelContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DBModelContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Models\DBModelContext.dbml.layout">
+      <DependentUpon>DBModelContext.dbml</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -175,9 +187,22 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutTest01.cshtml" />
+    <Content Include="Views\SinhVien\Index.cshtml" />
+    <Content Include="Views\SinhVien\Details.cshtml" />
+    <Content Include="Views\SinhVien\Create.cshtml" />
+    <Content Include="Views\SinhVien\Edit.cshtml" />
+    <Content Include="Views\SinhVien\Delete.cshtml" />
+    <Content Include="Views\NguoiDung\DangNhap.cshtml" />
+    <Content Include="Views\HocPhan\Index.cshtml" />
+    <Content Include="Views\HocPhan\HocPhanPartial.cshtml" />
+    <Content Include="Views\HocPhan\HocPhan.cshtml" />
+    <Content Include="Views\HocPhan\DangKy.cshtml" />
+    <Content Include="Views\HocPhan\XacNhanDangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -191,6 +216,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<KiemTra_NguyenMinhNhat.Models.HocPhan>
+@{
+    ViewBag.Title = "HocPhan";
+    Layout = "~/Views/Shared/_LayoutTest01.cshtml";
+}
+
+<h2>ĐĂNG KÝ HỌC PHẦN</h2>
+
+<table class="table">
+    <tr style="text-align: center; font-weight: bold">
+        <th>
+            Mã học phần
+        </th>
+        <th>
+            Tên học phần
+        </th>
+        <th>
+            Số tín chỉ
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTinChi)
+            </td>       
+            <td>
+                @Html.ActionLink("Xoá", "XoaHocPhan", new { @id = item.MaHP })
+            </td>
+        </tr>
+    }
+    <tr style="font-weight: bold; text-align: left; color:red">
+        <td colspan="2">Số học phần: @ViewBag.TongSoLuongHocPhan</td>
+    </tr>
+
+    <tr style="font-weight: bold; color: blue; text-align: right">
+        <td colspan="5">
+            @Html.ActionLink("Xoá đăng ký", "XoaTatCaDangKyHP")
+        </td>
+    </tr>
+
+    <tr style="font-weight: bold; color: yellow; text-align: right">
+        <td colspan="5">
+            @Html.ActionLink("Lưu thông tin", "DangKy", "HocPhan")
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,29 @@
+﻿@model KiemTra_NguyenMinhNhat.Models.SinhVien
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutTest01.cshtml";
+}
+
+<h2>ĐĂNG NHẬP</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.ValidationSummary(true)
+        <p><strong>Mã sinh viên</strong></p>
+        <div>
+            @Html.TextBox("mssv")
+        </div>
+        @ViewData["Loi"]
+        <h5 style="color:red; font-style:italic"> @ViewBag.Thongbao</h5>
+        <input type="submit" value="Đăng nhập" class="btn btn-default" />
+
+        <hr />
+        <div>
+            @Html.ActionLink("Quay lại trang trước", "Index", "Home")
+        </div>
+    </div>
+
+    
+}

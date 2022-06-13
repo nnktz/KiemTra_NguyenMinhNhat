@@ -1,0 +1,117 @@
+﻿@model IEnumerable<KiemTra_NguyenMinhNhat.Models.HocPhan>
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_LayoutTest01.cshtml";
+}
+
+<h2>ĐĂNG KÝ HỌC PHẦN</h2>
+
+<table class="table">
+    <tr style="text-align: center; font-weight: bold">
+        <th>
+            Mã học phần
+        </th>
+        <th>
+            Tên học phần
+        </th>
+        <th>
+            Số tín chỉ
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTinChi)
+            </td>
+            <td>
+                @Html.ActionLink("Xoá", "XoaHocPhan", new { @id = item.MaHP })
+            </td>
+        </tr>
+    }
+    <tr style="font-weight: bold; text-align: left; color:red">
+        <td colspan="2">Số học phần: @ViewBag.TongSoLuongHocPhan</td>
+    </tr>
+
+    <tr style="font-weight: bold; color: blue; text-align: right">
+        <td colspan="5">
+            @Html.ActionLink("Xoá đăng ký", "XoaTatCaDangKyHP")
+        </td>
+    </tr>
+
+    <tr style="font-weight: bold; color: yellow; text-align: right">
+        <td colspan="5">
+            @Html.ActionLink("Lưu thông tin", "DangKy", "HocPhan")
+        </td>
+    </tr>
+</table>
+
+@using KiemTra_NguyenMinhNhat.Models;
+
+<h2>Thông tin đặt hàng</h2>
+
+@{
+    SinhVien sv = (SinhVien)Session["TaiKhoan"];
+}
+
+<table align="center">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height: 40px">
+            <td>
+                Mã sinh viên: 
+            </td>
+            <td style="font-weight: bold">
+                @sv.MaSV
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>
+                Họ tên: 
+            </td>
+            <td style="font-weight: bold">
+                @sv.HoTen
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>
+                Ngày sinh: 
+            </td>
+            <td style="font-weight: bold">
+                @sv.NgaySinh
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>
+                Ngành học: 
+            </td>
+            <td style="font-weight: bold">
+                @sv.NganhHoc
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>
+                Ngày đăng ký:
+            </td>
+            <td style="font-weight: bold">
+                @DateTime.Now.ToLongDateString()
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td></td>
+            <td>
+                <input type="submit" value="Xác nhận" />
+            </td>
+        </tr>
+    }
+</table>
+
