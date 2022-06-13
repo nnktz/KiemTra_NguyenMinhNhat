@@ -137,10 +137,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBModelContext.designer.cs">
+      <DependentUpon>DBModelContext.dbml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModelContext.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\hocphan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

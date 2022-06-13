@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KiemTra_NguyenMinhNhat.Models.HocPhan>
+﻿@model IEnumerable<KiemTra_NguyenMinhNhat.Models.hocphan>
 @{
     ViewBag.Title = "DangKy";
     Layout = "~/Views/Shared/_LayoutTest01.cshtml";
@@ -24,16 +24,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MaHP)
+                @Html.DisplayFor(modelItem => item.mahp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenHP)
+                @Html.DisplayFor(modelItem => item.tenhp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SoTinChi)
+                @Html.DisplayFor(modelItem => item.sotinchi)
             </td>
             <td>
-                @Html.ActionLink("Xoá", "XoaHocPhan", new { @id = item.MaHP })
+                @Html.ActionLink("Xoá", "XoaHocPhan", new { @id = item.mahp })
             </td>
         </tr>
     }
@@ -95,7 +95,7 @@
                 Ngành học: 
             </td>
             <td style="font-weight: bold">
-                @sv.NganhHoc
+                @sv.MaNganh
             </td>
         </tr>
         <tr style="height: 40px">

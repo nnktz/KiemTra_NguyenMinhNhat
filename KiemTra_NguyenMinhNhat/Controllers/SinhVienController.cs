@@ -18,9 +18,9 @@ namespace KiemTra_NguyenMinhNhat.Controllers
         }
 
         //---Details---
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
-            var sinhvien = data.SinhViens.Where(x => x.MaSV == id).First();
+            var sinhvien = data.SinhViens.Where(n => Convert.ToInt32(n.MaSV) == id).First();
             return View(sinhvien);
         }
 
@@ -57,21 +57,21 @@ namespace KiemTra_NguyenMinhNhat.Controllers
         }
 
         //---Edit---
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            var sinhVien = data.SinhViens.First(x => x.MaSV == id);
+            var sinhVien = data.SinhViens.First(n => Convert.ToInt32(n.MaSV) == id);
             return View(sinhVien);
         }
         [HttpPost]
-        public ActionResult Edit(string id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            var masv = data.SinhViens.First(x => x.MaSV == id);
+            var masv = data.SinhViens.First(n => Convert.ToInt32(n.MaSV) == id);
             var hoten = collection["hoten"];
             var gioitinh = collection["gioitinh"];
             var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);
             var Hinh = collection["Hinh"];
             var manganh = collection["manganh"];
-            masv.MaSV = id;
+            masv.MaSV = id.ToString();
             if (String.IsNullOrEmpty(hoten))
             {
                 ViewData["Error"] = "Don't empty!";
@@ -91,15 +91,15 @@ namespace KiemTra_NguyenMinhNhat.Controllers
         }
 
         //---Delete---
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            var sinhvien = data.SinhViens.First(x => x.MaSV == id);
+            var sinhvien = data.SinhViens.First(n => Convert.ToInt32(n.MaSV) == id);
             return View(sinhvien);
         }
         [HttpPost]
-        public ActionResult Delete(string id, FormCollection collection)
+        public ActionResult Delete(int id, FormCollection collection)
         {
-            var sinhvien = data.SinhViens.Where(x => x.MaSV == id).First();
+            var sinhvien = data.SinhViens.Where(n => Convert.ToInt32(n.MaSV) == id).First();
             data.SinhViens.DeleteOnSubmit(sinhvien);
             data.SubmitChanges();
             return RedirectToAction("Index");

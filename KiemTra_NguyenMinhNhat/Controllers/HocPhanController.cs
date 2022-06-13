@@ -9,45 +9,45 @@ namespace KiemTra_NguyenMinhNhat.Controllers
 {
     public class HocPhanController : Controller
     {
-        DBModelContextDataContext data = new DBModelContextDataContext();     
+        DBModelContextDataContext data = new DBModelContextDataContext();
         // GET: HocPhan
+
         public ActionResult Index()
         {
             var hocphan = from hp in data.HocPhans select hp;
             return View(hocphan);
         }
-        public List<HocPhan> LayHocPhan()
+        public List<hocphan> LayHocPhan()
         {
-            List<HocPhan> listHocPhan = Session["HocPhan"] as List<HocPhan>;
+            List<hocphan> listHocPhan = Session["HocPhan"] as List<hocphan>;
             if (listHocPhan == null)
             {
-                listHocPhan = new List<HocPhan>();
+                listHocPhan = new List<hocphan>();
                 Session["HocPhan"] = listHocPhan;
             }
             return listHocPhan;
         }
 
-        /*public ActionResult DangKyHP(string id, string strURL)
+        public ActionResult DangKyHP(string id, string strURL)
         {
-            List<HocPhan> listHocPhan = LayHocPhan();
-            HocPhan hp = listHocPhan.Find(n => n.MaHP == id);
+            List<hocphan> listHocPhan = LayHocPhan();
+            hocphan hp = listHocPhan.Find(n => n.mahp == id);
             if (hp == null)
             {
-                hp = new HocPhan(id);
+                hp = new hocphan(id);
                 listHocPhan.Add(hp);
                 return Redirect(strURL);
             }
             else
             {
-                ViewBag.ThongBao = "Học phần này đã đăng ký";
                 return Redirect(strURL);
             }
-        }*/
+        }
 
         private int TongSoLuongHocPhan()
         {
             int tsl = 0;
-            List<HocPhan> listHocPhan = Session["HocPhan"] as List<HocPhan>;
+            List<hocphan> listHocPhan = Session["HocPhan"] as List<hocphan>;
             if (listHocPhan != null)
             {
                 tsl = listHocPhan.Count;
@@ -57,11 +57,11 @@ namespace KiemTra_NguyenMinhNhat.Controllers
 
         public ActionResult XoaHocPhan(string id)
         {
-            List<HocPhan> listHocPhan = LayHocPhan();
-            HocPhan hp = listHocPhan.SingleOrDefault(n => n.MaHP == id);
+            List<hocphan> listHocPhan = LayHocPhan();
+            hocphan hp = listHocPhan.SingleOrDefault(n => n.mahp == id);
             if (hp != null)
             {
-                listHocPhan.RemoveAll(n => n.MaHP == id);
+                listHocPhan.RemoveAll(n => n.mahp == id);
                 return RedirectToAction("HocPhan");
             }
             return RedirectToAction("HocPhan");
@@ -69,14 +69,14 @@ namespace KiemTra_NguyenMinhNhat.Controllers
 
         public ActionResult XoaTatCaDangKyHP()
         {
-            List<HocPhan> listHocPhan = LayHocPhan();
+            List<hocphan> listHocPhan = LayHocPhan();
             listHocPhan.Clear();
             return RedirectToAction("HocPhan");
         }
 
         public ActionResult HocPhan()
         {
-            List<HocPhan> listHocPhan = LayHocPhan();
+            List<hocphan> listHocPhan = LayHocPhan();
             ViewBag.TongSoLuongHocPhan = TongSoLuongHocPhan();
             return View(listHocPhan);
         }
@@ -87,6 +87,7 @@ namespace KiemTra_NguyenMinhNhat.Controllers
             return PartialView();
         }
 
+        [HttpGet]
         public ActionResult DangKy()
         {
             if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
@@ -97,28 +98,28 @@ namespace KiemTra_NguyenMinhNhat.Controllers
             {
                 return RedirectToAction("Index", "HocPhan");
             }
-            List<HocPhan> listHocPhan = LayHocPhan();
+            List<hocphan> listHocPhan = LayHocPhan();
             ViewBag.TongSoLuongSanPham = TongSoLuongHocPhan();
             return View(listHocPhan);
         }
-       /* public ActionResult DangKy(FormCollection collection)
+
+        public ActionResult DangKy(FormCollection collection)
         {
             DangKy dk = new DangKy();
             SinhVien sv = (SinhVien)Session["TaiKhoan"];
-            HocPhan s = new HocPhan();
 
-            List<HocPhan> hocPhans = LayHocPhan();
+            List<hocphan> hocPhans = LayHocPhan();
 
             dk.NgayDK = DateTime.Now;
             dk.MaSV = sv.MaSV;
 
-            data.HocPhans.InsertOnSubmit(dk);
+            data.DangKies.InsertOnSubmit(dk);
             data.SubmitChanges();
             foreach (var item in hocPhans)
             {
                 ChiTietDangKy ctdk = new ChiTietDangKy();
                 ctdk.MaDK = dk.MaDK;
-                ctdk.MaHP = item.MaHP;
+                ctdk.MaHP = item.mahp;
                 data.SubmitChanges();
 
                 data.ChiTietDangKies.InsertOnSubmit(ctdk);
@@ -126,7 +127,8 @@ namespace KiemTra_NguyenMinhNhat.Controllers
             data.SubmitChanges();
             Session["HocPhan"] = null;
             return RedirectToAction("XacNhanDangKy", "HocPhan");
-        }*/
+        }
+
         public ActionResult XacNhanDangKy()
         {
             return View();
